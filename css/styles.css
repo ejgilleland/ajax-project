@@ -89,6 +89,11 @@ main {
   cursor: pointer;
 }
 
+.roulette::selection,
+.roulette-container::selection {
+  background-color: transparent;
+}
+
 .response-container {
   background-color: #3a2b43;
   color: #dfdfdf;
