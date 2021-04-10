@@ -3,6 +3,9 @@ var appData = {
   isJoke: false,
   interactCallback: function (event) {
     if (event.target === page.$roulette) {
+      gsap.to('.roulette', {duration: 1.5, rotation: -360, onComplete: function () {
+        gsap.set('.roulette', {rotation: 0});
+      }});
       if (Math.random() < 0.5) {
         appData.isJoke = false;
       } else {
