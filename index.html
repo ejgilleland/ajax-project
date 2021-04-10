@@ -6,6 +6,10 @@
   <title>AJAX Project</title>
   <script src="https://kit.fontawesome.com/d82b9452a9.js" crossorigin="anonymous"></script>
   <link rel="icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&family=Palanquin+Dark:wght@400;500;600;700&family=Palanquin:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -13,13 +17,29 @@
 <body>
   <header>
     <div class="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Likes</a></li>
+      </ul>
       <i class="fas fa-bars"></i>
-      <h1 class="title">Dad Roulette</h1>
+      <h1 class="title"><a href="#">Dad Roulette</a></h1>
     </div>
   </header>
   <main>
     <h4 class="page-heading">Press the icon to retrieve a quote or dad joke</h4>
-    <img src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
+    <div class="roulette-container">
+      <img class="roulette" src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
+    </div>
+    <div class="response-container hidden">
+      <p class="response-content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+      </p>
+      <div class="reactions">
+        <i class="far fa-thumbs-down"></i>
+        <i class="far fa-heart"></i>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
