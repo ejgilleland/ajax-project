@@ -1,11 +1,17 @@
+/* global gsap */
+
 var appData = {
   currentResponseID: '',
   isJoke: false,
   interactCallback: function (event) {
     if (event.target === page.$roulette) {
-      gsap.to('.roulette', {duration: 1.5, rotation: -360, onComplete: function () {
-        gsap.set('.roulette', {rotation: 0});
-      }});
+      gsap.to('.roulette', {
+        duration: 1.5,
+        rotation: -360,
+        onComplete: function () {
+          gsap.set('.roulette', { rotation: 0 });
+        }
+      });
       if (Math.random() < 0.5) {
         appData.isJoke = false;
       } else {
@@ -19,7 +25,7 @@ var appData = {
         xhr.addEventListener('load', function () {
           page.$content.textContent = xhr.response.joke;
           appData.currentResponseID = xhr.response.id;
-          document.querySelector('.response-container').className = 'response-container';
+          document.querySelector('.response-container').classList.remove('hidden');
         });
       } else {
         xhr.open('GET', 'https://api.quotable.io/random');
@@ -40,4 +46,4 @@ var page = {
   $roulette: document.querySelector('.roulette')
 };
 
-window.addEventListener('pointerdown', appData.interactCallback);
+page.$roulette.addEventListener('click', appData.interactCallback);

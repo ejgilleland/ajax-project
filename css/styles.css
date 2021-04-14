@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  min-height: 100%;
 }
 
 .navbar {
@@ -20,7 +20,7 @@ body {
   padding: 0 1.5rem 0 1.5rem;
 }
 
-i.fas.fa-bars {
+.dropdown {
   font-size: 1.5rem;
 }
 
@@ -87,11 +87,6 @@ main {
 
 .roulette:hover {
   cursor: pointer;
-}
-
-.roulette::selection,
-.roulette-container::selection {
-  background-color: transparent;
 }
 
 .response-container {

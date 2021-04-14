@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
-  <script src="https://kit.fontawesome.com/d82b9452a9.js" crossorigin="anonymous"></script>
   <link rel="icon" href="images/favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
@@ -15,6 +12,7 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://kit.fontawesome.com/d82b9452a9.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
@@ -23,7 +21,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Likes</a></li>
       </ul>
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-bars dropdown"></i>
       <h1 class="title"><a href="#">Dad Roulette</a></h1>
     </div>
   </header>
@@ -33,16 +31,15 @@
       <img class="roulette" src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
     </div>
     <div class="response-container hidden">
-      <p class="response-content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      </p>
+      <p class="response-content"></p>
       <div class="reactions">
-        <i class="far fa-thumbs-down"></i>
-        <i class="far fa-heart"></i>
+        <i class="far fa-thumbs-down empty-thumb"></i>
+        <i class="far fa-heart empty-heart"></i>
       </div>
     </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

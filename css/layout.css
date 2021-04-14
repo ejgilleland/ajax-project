@@ -3,7 +3,7 @@
   padding: 0.5rem 1rem 1rem 1rem;
 }
 
-i.fas.fa-bars {
+.dropdown {
   padding: 0 2rem 0 0;
 }
 
@@ -29,7 +29,7 @@ i.fas.fa-bars {
 }
 
 @media screen and (min-width: 410px) {
-  i.fas.fa-bars {
+  .dropdown {
     left: 1rem;
     position: absolute;
   }
@@ -44,7 +44,7 @@ i.fas.fa-bars {
 }
 
 @media screen and (min-width: 550px) {
-  i.fas.fa-bars {
+  .dropdown {
     left: 2rem;
   }
 
@@ -54,8 +54,8 @@ i.fas.fa-bars {
 }
 
 @media screen and (min-width: 769px) {
-  i.fas.fa-bars {
-    display: none !important;
+  .dropdown {
+    display: none;
   }
 
   .navbar > ul {
