@@ -5,15 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&family=Palanquin+Dark:wght@400;500;600;700&family=Palanquin:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://kit.fontawesome.com/d82b9452a9.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
+    <div class="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Likes</a></li>
+      </ul>
+      <i class="fas fa-bars dropdown"></i>
+      <h1 class="title"><a href="#">Dad Roulette</a></h1>
+    </div>
   </header>
   <main>
+    <h4 class="page-heading">Press the icon to retrieve a quote or dad joke</h4>
+    <div class="roulette-container">
+      <img class="roulette" src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
+    </div>
+    <div class="response-container hidden">
+      <p class="response-content"></p>
+      <div class="reactions">
+        <i class="far fa-thumbs-down empty-thumb"></i>
+        <i class="far fa-heart empty-heart"></i>
+      </div>
+    </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
