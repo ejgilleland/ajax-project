@@ -33,7 +33,7 @@ var appData = {
         xhr.addEventListener('load', function (event) {
           page.$content.textContent = xhr.response.content;
           appData.currentResponseID = xhr.response._id;
-          document.querySelector('.response-container').className = 'response-container';
+          document.querySelector('.response-container').classList.remove('hidden');
         });
       }
       xhr.send();
