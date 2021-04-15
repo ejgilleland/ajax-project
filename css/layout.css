@@ -5,6 +5,7 @@
 
 .dropdown {
   padding: 0 2rem 0 0;
+  font-size: 1.5rem;
 }
 
 .navbar {
@@ -55,7 +56,7 @@
 
 @media screen and (min-width: 769px) {
   .dropdown {
-    display: none;
+    display: none !important;
   }
 
   .navbar > ul {

@@ -1,6 +1,5 @@
-/* exported data */
-//  var user = {
-
-//   likes: [],
-//   dislikes: []
-//  }
+/* exported user */
+var user = {
+  likes: [],
+  dislikes: []
+};
