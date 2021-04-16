@@ -32,6 +32,13 @@ var appData = {
           page.$emptyHeart.classList.remove('hidden');
           page.$fullHeart.classList.add('hidden');
         }
+        if (appData.idChecker(user.dislikes)) {
+          page.$emptyThumb.classList.add('hidden');
+          page.$fullThumb.classList.remove('hidden');
+        } else {
+          page.$emptyThumb.classList.remove('hidden');
+          page.$fullThumb.classList.add('hidden');
+        }
         document.querySelector('.response-container').classList.remove('hidden');
       });
     } else {
@@ -46,6 +53,13 @@ var appData = {
         } else {
           page.$emptyHeart.classList.remove('hidden');
           page.$fullHeart.classList.add('hidden');
+        }
+        if (appData.idChecker(user.dislikes)) {
+          page.$emptyThumb.classList.add('hidden');
+          page.$fullThumb.classList.remove('hidden');
+        } else {
+          page.$emptyThumb.classList.remove('hidden');
+          page.$fullThumb.classList.add('hidden');
         }
         document.querySelector('.response-container').classList.remove('hidden');
       });
@@ -80,6 +94,31 @@ var appData = {
   },
   localStorageGetter: function (event) {
     user = JSON.parse(localStorage.getItem('userData'));
+  },
+  temporaryCustomFetcher: function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://api.quotable.io/quotes/y6UREhsh22mN');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      page.$content.textContent = xhr.response.content;
+      appData.currentResponseID = xhr.response._id;
+      if (appData.idChecker(user.likes)) {
+        page.$emptyHeart.classList.add('hidden');
+        page.$fullHeart.classList.remove('hidden');
+      } else {
+        page.$emptyHeart.classList.remove('hidden');
+        page.$fullHeart.classList.add('hidden');
+      }
+      if (appData.idChecker(user.dislikes)) {
+        page.$emptyThumb.classList.add('hidden');
+        page.$fullThumb.classList.remove('hidden');
+      } else {
+        page.$emptyThumb.classList.remove('hidden');
+        page.$fullThumb.classList.add('hidden');
+      }
+      document.querySelector('.response-container').classList.remove('hidden');
+    });
+    xhr.send();
   }
 };
 
