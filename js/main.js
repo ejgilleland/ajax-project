@@ -59,6 +59,12 @@ var appData = {
       }
       page.$emptyHeart.classList.add('hidden');
       page.$fullHeart.classList.remove('hidden');
+    } else if (event.target === page.$emptyThumb) {
+      if (!appData.idChecker(user.dislikes)) {
+        user.dislikes.push({ joke: appData.isJoke, id: appData.currentResponseID });
+      }
+      page.$emptyThumb.classList.add('hidden');
+      page.$fullThumb.classList.remove('hidden');
     }
   },
   idChecker: function (array) {
