@@ -32,6 +32,13 @@ var appData = {
           page.$emptyHeart.classList.remove('hidden');
           page.$fullHeart.classList.add('hidden');
         }
+        if (appData.idChecker(user.dislikes)) {
+          page.$emptyThumb.classList.add('hidden');
+          page.$fullThumb.classList.remove('hidden');
+        } else {
+          page.$emptyThumb.classList.remove('hidden');
+          page.$fullThumb.classList.add('hidden');
+        }
         document.querySelector('.response-container').classList.remove('hidden');
       });
     } else {
@@ -47,6 +54,13 @@ var appData = {
           page.$emptyHeart.classList.remove('hidden');
           page.$fullHeart.classList.add('hidden');
         }
+        if (appData.idChecker(user.dislikes)) {
+          page.$emptyThumb.classList.add('hidden');
+          page.$fullThumb.classList.remove('hidden');
+        } else {
+          page.$emptyThumb.classList.remove('hidden');
+          page.$fullThumb.classList.add('hidden');
+        }
         document.querySelector('.response-container').classList.remove('hidden');
       });
     }
@@ -57,8 +71,24 @@ var appData = {
       if (!appData.idChecker(user.likes)) {
         user.likes.push({ joke: appData.isJoke, id: appData.currentResponseID });
       }
+      if (appData.idChecker(user.dislikes)) {
+        page.$emptyThumb.classList.remove('hidden');
+        page.$fullThumb.classList.add('hidden');
+        appData.idRemover(user.dislikes);
+      }
       page.$emptyHeart.classList.add('hidden');
       page.$fullHeart.classList.remove('hidden');
+    } else if (event.target === page.$emptyThumb) {
+      if (!appData.idChecker(user.dislikes)) {
+        user.dislikes.push({ joke: appData.isJoke, id: appData.currentResponseID });
+      }
+      if (appData.idChecker(user.likes)) {
+        page.$emptyHeart.classList.remove('hidden');
+        page.$fullHeart.classList.add('hidden');
+        appData.idRemover(user.likes);
+      }
+      page.$emptyThumb.classList.add('hidden');
+      page.$fullThumb.classList.remove('hidden');
     }
   },
   idChecker: function (array) {
@@ -68,6 +98,14 @@ var appData = {
       }
     }
     return false;
+  },
+  idRemover: function (array) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (array[i].id === appData.currentResponseID) {
+        array.splice(i, 1);
+        return;
+      }
+    }
   },
   localStorageSaver: function (event) {
     localStorage.setItem('userData', JSON.stringify(user));
