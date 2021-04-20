@@ -89,6 +89,14 @@ var appData = {
       }
       page.$emptyThumb.classList.add('hidden');
       page.$fullThumb.classList.remove('hidden');
+    } else if (event.target === page.$fullHeart) {
+      appData.idRemover(user.likes);
+      page.$emptyHeart.classList.remove('hidden');
+      page.$fullHeart.classList.add('hidden');
+    } else if (event.target === page.$fullThumb) {
+      appData.idRemover(user.dislikes);
+      page.$emptyThumb.classList.remove('hidden');
+      page.$fullThumb.classList.add('hidden');
     }
   },
   idChecker: function (array) {
