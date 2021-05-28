@@ -85,7 +85,8 @@ main {
   cursor: pointer;
 }
 
-.response-container {
+.response-container,
+.likes-container {
   background-color: #3a2b43;
   color: #dfdfdf;
   border-radius: 25px;
@@ -93,7 +94,8 @@ main {
   font-size: 20px;
 }
 
-.response-content {
+.response-content,
+.likes-content {
   padding: 0.5rem 1rem 0 1rem;
 }
 
