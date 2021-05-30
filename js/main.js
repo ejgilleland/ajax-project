@@ -66,6 +66,23 @@ var appData = {
     }
     xhr.send();
   },
+  viewSwapper: function (event) {
+    if (event.target.tagName === 'A') {
+      for (let i = 0; i < page.$mainList.length; i++) {
+        if (event.target.dataset.view === page.$mainList[i].dataset.view) {
+          page.$mainList[i].classList.remove('hidden');
+          page.$dropDown.classList.add('hidden');
+        } else if (event.target.dataset.view !== page.$mainList[i].dataset.view) {
+          page.$mainList[i].classList.add('hidden');
+          page.$dropDown.classList.add('hidden');
+        }
+      }
+    } else if (event.target.classList.contains('dropdown')) {
+      page.$dropDown.classList.toggle('hidden');
+    } else {
+      page.$dropDown.classList.add('hidden');
+    }
+  },
   reactionCallback: function (event) {
     if (event.target === page.$emptyHeart) {
       if (!appData.idChecker(user.likes)) {
@@ -124,6 +141,9 @@ var appData = {
 };
 
 var page = {
+  $navbar: document.querySelector('.navbar'),
+  $mainList: document.querySelectorAll('main'),
+  $dropDown: document.querySelector('.dropdown-list'),
   $content: document.querySelector('.response-content'),
   $roulette: document.querySelector('.roulette'),
   $reactions: document.querySelector('.reactions'),
@@ -135,5 +155,6 @@ var page = {
 
 page.$roulette.addEventListener('click', appData.rouletteCallback);
 page.$reactions.addEventListener('click', appData.reactionCallback);
+window.addEventListener('click', appData.viewSwapper);
 window.addEventListener('beforeunload', appData.localStorageSaver);
 window.addEventListener('DOMContentLoaded', appData.localStorageGetter);

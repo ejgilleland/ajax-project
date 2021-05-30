@@ -18,14 +18,20 @@
   <header>
     <div class="navbar">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Likes</a></li>
+        <li><a href="#" data-view="home">Home</a></li>
+        <li><a href="#" data-view="likes">Likes</a></li>
       </ul>
       <i class="fas fa-bars dropdown"></i>
-      <h1 class="title"><a href="#">Dad Roulette</a></h1>
+      <h1 class="title"><a href="#" data-view="home">Dad Roulette</a></h1>
     </div>
   </header>
-  <main class="hidden">
+    <div class="dropdown-list hidden">
+      <ul>
+        <li><a href="#" data-view="home">Home</a></li>
+        <li><a href="#" data-view="likes">Likes</a></li>
+      </ul>
+    </div>
+  <main data-view="home" >
     <h4 class="page-heading">Press the icon to retrieve a quote or dad joke</h4>
     <div class="roulette-container">
       <img class="roulette" src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
@@ -40,7 +46,7 @@
       </div>
     </div>
   </main>
-  <main>
+  <main data-view="likes" class="hidden">
     <h4 class="page-heading">Likes</h4>
     <div class="likes">
       <div class="likes-container">

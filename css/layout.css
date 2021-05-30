@@ -64,6 +64,10 @@
     display: none;
   }
 
+  div.dropdown-list {
+    display: none;
+  }
+
   .navbar > ul {
     display: flex;
   }
