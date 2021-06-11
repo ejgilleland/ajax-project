@@ -31,7 +31,7 @@
         <li><a href="#" data-view="likes">Likes</a></li>
       </ul>
     </div>
-  <main data-view="home" >
+  <main data-view="home" class="home">
     <h4 class="page-heading">Press the icon to retrieve a quote or dad joke</h4>
     <div class="roulette-container">
       <img class="roulette" src="/images/roulette-svgrepo-com.svg" alt="roulette icon, please press!!">
@@ -46,56 +46,12 @@
       </div>
     </div>
   </main>
-  <main data-view="likes" class="hidden">
+  <main data-view="likes" class="hidden likes-main">
     <h4 class="page-heading">Likes</h4>
+    <div>
+      <h2 class="empty-likes hidden">You have no liked items!</h2>
+    </div>
     <div class="likes">
-      <div class="likes-container">
-        <p class="likes-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <div class="reactions">
-          <i class="far fa-thumbs-down empty-thumb"></i>
-          <i class="fas fa-thumbs-down full-thumb hidden"></i>
-          <i class="far fa-heart empty-heart"></i>
-          <i class="fas fa-heart full-heart hidden"></i>
-        </div>
-      </div>
-      <div class="likes-container">
-        <p class="likes-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
-        </p>
-        <div class="reactions">
-          <i class="far fa-thumbs-down empty-thumb"></i>
-          <i class="fas fa-thumbs-down full-thumb hidden"></i>
-          <i class="far fa-heart empty-heart"></i>
-          <i class="fas fa-heart full-heart hidden"></i>
-        </div>
-      </div>
-      <div class="likes-container">
-        <p class="likes-content">
-          boris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <div class="reactions">
-          <i class="far fa-thumbs-down empty-thumb"></i>
-          <i class="fas fa-thumbs-down full-thumb hidden"></i>
-          <i class="far fa-heart empty-heart"></i>
-          <i class="fas fa-heart full-heart hidden"></i>
-        </div>
-      </div>
-      <div class="likes-container">
-        <p class="likes-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <div class="reactions">
-          <i class="far fa-thumbs-down empty-thumb"></i>
-          <i class="fas fa-thumbs-down full-thumb hidden"></i>
-          <i class="far fa-heart empty-heart"></i>
-          <i class="fas fa-heart full-heart hidden"></i>
-        </div>
-      </div>
     </div>
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>

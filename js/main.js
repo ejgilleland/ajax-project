@@ -3,6 +3,7 @@
 
 var appData = {
   currentResponseID: '',
+  currentContent: '',
   isJoke: false,
   rouletteCallback: function (event) {
     gsap.to('.roulette', {
@@ -23,7 +24,8 @@ var appData = {
       xhr.setRequestHeader('Accept', 'application/json');
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
-        page.$content.textContent = xhr.response.joke;
+        appData.currentContent = xhr.response.joke;
+        page.$content.textContent = appData.currentContent;
         appData.currentResponseID = xhr.response.id;
         if (appData.idChecker(user.likes)) {
           page.$emptyHeart.classList.add('hidden');
@@ -45,7 +47,8 @@ var appData = {
       xhr.open('GET', 'https://api.quotable.io/random');
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
-        page.$content.textContent = xhr.response.content;
+        appData.currentContent = xhr.response.content;
+        page.$content.textContent = appData.currentContent;
         appData.currentResponseID = xhr.response._id;
         if (appData.idChecker(user.likes)) {
           page.$emptyHeart.classList.add('hidden');
@@ -86,7 +89,9 @@ var appData = {
   reactionCallback: function (event) {
     if (event.target === page.$emptyHeart) {
       if (!appData.idChecker(user.likes)) {
-        user.likes.push({ joke: appData.isJoke, id: appData.currentResponseID });
+        user.likes.push({ joke: appData.isJoke, id: appData.currentResponseID, content: appData.currentContent });
+        page.$likesPage.append(appData.likesRenderer(user.likes.length - 1));
+        page.$likesDefault.classList.add('hidden');
       }
       if (appData.idChecker(user.dislikes)) {
         page.$emptyThumb.classList.remove('hidden');
@@ -114,6 +119,33 @@ var appData = {
       appData.idRemover(user.dislikes);
       page.$emptyThumb.classList.remove('hidden');
       page.$fullThumb.classList.add('hidden');
+    }
+  },
+  likesRenderer: function (i) {
+    var $likesContainer = document.createElement('div');
+    $likesContainer.classList.add('likes-container');
+    $likesContainer.dataset.id = user.likes[i].id;
+    var $likesContent = document.createElement('p');
+    $likesContent.classList.add('likes-content');
+    $likesContent.textContent = user.likes[i].content;
+    var $likesReactions = document.createElement('div');
+    $likesReactions.classList.add('reactions');
+    var $thumb = document.createElement('i');
+    $thumb.classList.add('far', 'fa-thumbs-down', 'empty-thumb');
+    var $heart = document.createElement('i');
+    $heart.classList.add('fas', 'fa-heart', 'full-heart');
+
+    $likesReactions.append($thumb, $heart);
+    $likesContainer.append($likesContent, $likesReactions);
+    return $likesContainer;
+  },
+  likesLoader: function () {
+    if (user.likes.length > 0) {
+      for (let i = 0; i < user.likes.length; i++) {
+        page.$likesPage.append(appData.likesRenderer(i));
+      }
+    } else {
+      page.$likesDefault.classList.remove('hidden');
     }
   },
   idChecker: function (array) {
@@ -146,11 +178,13 @@ var page = {
   $dropDown: document.querySelector('.dropdown-list'),
   $content: document.querySelector('.response-content'),
   $roulette: document.querySelector('.roulette'),
-  $reactions: document.querySelector('.reactions'),
-  $emptyHeart: document.querySelector('.empty-heart'),
-  $fullHeart: document.querySelector('.full-heart'),
-  $emptyThumb: document.querySelector('.empty-thumb'),
-  $fullThumb: document.querySelector('.full-thumb')
+  $likesPage: document.querySelector('div.likes'),
+  $likesDefault: document.querySelector('h2.empty-likes'),
+  $reactions: document.querySelector('.response-container > .reactions'),
+  $emptyHeart: document.querySelector('.home .empty-heart'),
+  $fullHeart: document.querySelector('.home .full-heart'),
+  $emptyThumb: document.querySelector('.home .empty-thumb'),
+  $fullThumb: document.querySelector('.home .full-thumb')
 };
 
 page.$roulette.addEventListener('click', appData.rouletteCallback);
@@ -158,3 +192,4 @@ page.$reactions.addEventListener('click', appData.reactionCallback);
 window.addEventListener('click', appData.viewSwapper);
 window.addEventListener('beforeunload', appData.localStorageSaver);
 window.addEventListener('DOMContentLoaded', appData.localStorageGetter);
+window.addEventListener('DOMContentLoaded', appData.likesLoader);

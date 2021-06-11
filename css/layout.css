@@ -90,7 +90,7 @@
   }
 
   .likes-content {
-    min-height: 70%;
+    min-height: calc(100% - 90px - 2rem);
   }
 
   .reactions {
