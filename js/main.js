@@ -109,6 +109,8 @@ var appData = {
           page.$emptyHeart.classList.remove('hidden');
           page.$fullHeart.classList.add('hidden');
           appData.idRemover(user.likes, appData.currentResponseID);
+          const likedNode = document.querySelector(`div[data-id='${appData.currentResponseID}']`);
+          likedNode.remove();
         }
         page.$emptyThumb.classList.add('hidden');
         page.$fullThumb.classList.remove('hidden');
@@ -116,6 +118,8 @@ var appData = {
         appData.idRemover(user.likes, appData.currentResponseID);
         page.$emptyHeart.classList.remove('hidden');
         page.$fullHeart.classList.add('hidden');
+        const likedNode = document.querySelector(`div[data-id='${appData.currentResponseID}']`);
+        likedNode.remove();
       } else if (event.target === page.$fullThumb) {
         appData.idRemover(user.dislikes, appData.currentResponseID);
         page.$emptyThumb.classList.remove('hidden');
@@ -127,16 +131,26 @@ var appData = {
         const targetId = closestContainer.dataset.id;
         appData.idRemover(user.likes, targetId);
         closestContainer.remove();
+        if (targetId === appData.currentResponseID) {
+          page.$emptyHeart.classList.remove('hidden');
+          page.$fullHeart.classList.add('hidden');
+        }
       } else if (event.target.classList.contains('empty-thumb')) {
         const closestContainer = event.target.closest('div.likes-container');
         const targetId = closestContainer.dataset.id;
         var removedItem = appData.idRemover(user.likes, targetId);
         user.dislikes.push(removedItem[0]);
         closestContainer.remove();
+        if (targetId === appData.currentResponseID) {
+          page.$emptyHeart.classList.remove('hidden');
+          page.$fullHeart.classList.add('hidden');
+          page.$emptyThumb.classList.add('hidden');
+          page.$fullThumb.classList.remove('hidden');
+        }
       }
-      if (user.likes.length === 0) {
-        page.$likesDefault.classList.remove('hidden');
-      }
+    }
+    if (user.likes.length === 0) {
+      page.$likesDefault.classList.remove('hidden');
     }
   },
   likesRenderer: function (i) {
