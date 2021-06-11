@@ -87,38 +87,56 @@ var appData = {
     }
   },
   reactionCallback: function (event) {
-    if (event.target === page.$emptyHeart) {
-      if (!appData.idChecker(user.likes)) {
-        user.likes.push({ joke: appData.isJoke, id: appData.currentResponseID, content: appData.currentContent });
-        page.$likesPage.append(appData.likesRenderer(user.likes.length - 1));
-        page.$likesDefault.classList.add('hidden');
-      }
-      if (appData.idChecker(user.dislikes)) {
-        page.$emptyThumb.classList.remove('hidden');
-        page.$fullThumb.classList.add('hidden');
-        appData.idRemover(user.dislikes);
-      }
-      page.$emptyHeart.classList.add('hidden');
-      page.$fullHeart.classList.remove('hidden');
-    } else if (event.target === page.$emptyThumb) {
-      if (!appData.idChecker(user.dislikes)) {
-        user.dislikes.push({ joke: appData.isJoke, id: appData.currentResponseID });
-      }
-      if (appData.idChecker(user.likes)) {
+    if (event.target.closest('main').dataset.view === 'home') {
+      if (event.target === page.$emptyHeart) {
+        if (!appData.idChecker(user.likes)) {
+          user.likes.push({ joke: appData.isJoke, id: appData.currentResponseID, content: appData.currentContent });
+          page.$likesPage.append(appData.likesRenderer(user.likes.length - 1));
+          page.$likesDefault.classList.add('hidden');
+        }
+        if (appData.idChecker(user.dislikes)) {
+          page.$emptyThumb.classList.remove('hidden');
+          page.$fullThumb.classList.add('hidden');
+          appData.idRemover(user.dislikes, appData.currentResponseID);
+        }
+        page.$emptyHeart.classList.add('hidden');
+        page.$fullHeart.classList.remove('hidden');
+      } else if (event.target === page.$emptyThumb) {
+        if (!appData.idChecker(user.dislikes)) {
+          user.dislikes.push({ joke: appData.isJoke, id: appData.currentResponseID, content: appData.currentContent });
+        }
+        if (appData.idChecker(user.likes)) {
+          page.$emptyHeart.classList.remove('hidden');
+          page.$fullHeart.classList.add('hidden');
+          appData.idRemover(user.likes, appData.currentResponseID);
+        }
+        page.$emptyThumb.classList.add('hidden');
+        page.$fullThumb.classList.remove('hidden');
+      } else if (event.target === page.$fullHeart) {
+        appData.idRemover(user.likes, appData.currentResponseID);
         page.$emptyHeart.classList.remove('hidden');
         page.$fullHeart.classList.add('hidden');
-        appData.idRemover(user.likes);
+      } else if (event.target === page.$fullThumb) {
+        appData.idRemover(user.dislikes, appData.currentResponseID);
+        page.$emptyThumb.classList.remove('hidden');
+        page.$fullThumb.classList.add('hidden');
       }
-      page.$emptyThumb.classList.add('hidden');
-      page.$fullThumb.classList.remove('hidden');
-    } else if (event.target === page.$fullHeart) {
-      appData.idRemover(user.likes);
-      page.$emptyHeart.classList.remove('hidden');
-      page.$fullHeart.classList.add('hidden');
-    } else if (event.target === page.$fullThumb) {
-      appData.idRemover(user.dislikes);
-      page.$emptyThumb.classList.remove('hidden');
-      page.$fullThumb.classList.add('hidden');
+    } else if (event.target.closest('main').dataset.view === 'likes') {
+      if (event.target.classList.contains('full-heart')) {
+        const closestContainer = event.target.closest('div.likes-container');
+        const targetId = closestContainer.dataset.id;
+        appData.idRemover(user.likes, targetId);
+        closestContainer.remove();
+      } else if (event.target.classList.contains('empty-thumb')) {
+        const closestContainer = event.target.closest('div.likes-container');
+        const targetId = closestContainer.dataset.id;
+        var removedItem = appData.idRemover(user.likes, targetId);
+        user.dislikes.push(removedItem[0]);
+        closestContainer.remove();
+      }
+      if (user.likes.length === 0) {
+        page.$likesDefault.classList.remove('hidden');
+      }
     }
   },
   likesRenderer: function (i) {
@@ -134,7 +152,6 @@ var appData = {
     $thumb.classList.add('far', 'fa-thumbs-down', 'empty-thumb');
     var $heart = document.createElement('i');
     $heart.classList.add('fas', 'fa-heart', 'full-heart');
-
     $likesReactions.append($thumb, $heart);
     $likesContainer.append($likesContent, $likesReactions);
     return $likesContainer;
@@ -156,11 +173,10 @@ var appData = {
     }
     return false;
   },
-  idRemover: function (array) {
+  idRemover: function (array, identifier) {
     for (let i = array.length - 1; i >= 0; i--) {
-      if (array[i].id === appData.currentResponseID) {
-        array.splice(i, 1);
-        return;
+      if (array[i].id === identifier) {
+        return array.splice(i, 1);
       }
     }
   },
@@ -189,6 +205,7 @@ var page = {
 
 page.$roulette.addEventListener('click', appData.rouletteCallback);
 page.$reactions.addEventListener('click', appData.reactionCallback);
+page.$likesPage.addEventListener('click', appData.reactionCallback);
 window.addEventListener('click', appData.viewSwapper);
 window.addEventListener('beforeunload', appData.localStorageSaver);
 window.addEventListener('DOMContentLoaded', appData.localStorageGetter);
