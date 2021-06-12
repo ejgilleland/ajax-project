@@ -23,6 +23,11 @@
   font-size: 1.25em;
 }
 
+.response-container,
+.likes-container {
+  margin: 1rem auto;
+}
+
 @media screen and (min-width: 360px) {
   .title {
     font-size: 1.5em;
@@ -59,16 +64,40 @@
     display: none;
   }
 
+  div.dropdown-list {
+    display: none;
+  }
+
   .navbar > ul {
     display: flex;
   }
 
   .response-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
+  }
+
+  .likes {
+    display: flex;
+    max-width: 800px;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+  }
+
+  .likes-container {
+    margin: 1rem;
+    flex-basis: calc(50% - 2rem);
+  }
+
+  .likes-content {
+    min-height: calc(100% - 90px - 2rem);
   }
 
   .reactions {
     padding: 0.5rem 7rem 1rem 7rem;
+  }
+
+  .likes .reactions {
+    padding: 1rem;
   }
 }
